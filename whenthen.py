@@ -7,6 +7,8 @@ def whenthen(func):
             self._then = []
 
         def __call__(self, *args, **kwargs):
+            if len(self._when) != len(self._then):
+                raise SyntaxError
             for idx, func in enumerate(self._when):
                 if func(*args, **kwargs):
                     return self._then[idx](*args, **kwargs)
